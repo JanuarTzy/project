@@ -76,6 +76,8 @@
                                         @method('DELETE')
                                         <button type="submit" class="text-red-600 hover:text-red-800">Hapus</button>
                                     </form>
+                                    
+<a href="{{ route('products.show', $product) }}" class="text-gray-600">Detail</a>
                                 </td>
                             </tr>
                         @empty

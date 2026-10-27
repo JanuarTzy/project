@@ -54,9 +54,13 @@
                                     {{ $category->products_count }}
                                 </td>
 
-                                <td class="px-4 py-2 text-sm text-center">
-                                    <a href="{{ route('categories.edit', $category) }}"
+                                <td class="px-4 py-2 text-sm text-center space-x-2">
+                                    <a href="{{ route('categories.show', $category) }}"
                                         class="text-indigo-600 hover:text-indigo-800">
+                                        Detail
+                                    </a>
+                                    <a href="{{ route('categories.edit', $category) }}"
+                                        class="text-gray-600 hover:text-gray-800">
                                         Ubah
                                     </a>
                                 </td>

@@ -43,7 +43,14 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        $category->load('products');
+
+        $totalStock = $category->products->sum('stock');
+        $totalNilaiStock = $category->products->sum(function ($product) {
+            return $product->stock * $product->price;
+        });
+
+        return view('master-data.category.show', compact('category', 'totalStock', 'totalNilaiStock'));
     }
 
     /**
