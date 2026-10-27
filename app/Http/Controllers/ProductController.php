@@ -6,16 +6,34 @@ use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 
 class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::with('category')->latest()->paginate(10);
-        return view('master-data.product.index', compact('products'));
+        
+    $query = Product::with('category');
+ 
+    if ($request->filled('search')) {
+        $keyword = $request->search;
+        $query->where(function ($q) use ($keyword) {
+            $q->where('name', 'like', "%{$keyword}%")
+              ->orWhere('code', 'like', "%{$keyword}%");
+        });
+    }
+ 
+    if ($request->filled('category_id')) {
+        $query->where('category_id', $request->category_id);
+    }
+ 
+    $products = $query->latest()->paginate(10)->withQueryString();
+    $categories = Category::orderBy('name')->get();
+ 
+    return view('master-data.product.index', compact('products', 'categories'));
     }
 
     /**
@@ -54,21 +72,27 @@ class ProductController extends Controller
     return view('master-data.product.edit', compact('product', 'categories'));
 }
 
-
-
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
-    {
-        //
-    }
+    
+public function update(UpdateProductRequest $request, Product $product)
+{
+    $product->update($request->validated());
+ 
+    return redirect()->route('products.index')->with('success', 'Produk berhasil diperbarui.');
+}
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product)
-    {
-        //
-    }
+    
+public function destroy(Product $product)
+{
+    $product->delete();
+ 
+    return redirect()->route('products.index')->with('success', 'Produk berhasil dihapus.');
+}
+
+
 }
