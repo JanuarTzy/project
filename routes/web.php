@@ -3,7 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\auth\LoginController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\PosController;
+use App\Http\Controllers\Auth\LoginController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -44,6 +48,4 @@ Route::middleware(['auth', 'role:admin,kasir'])->group(function () {
 Route::get('/pos/history', function () {
     return 'Halaman Riwayat Transaksi Kasir';
 })->middleware(['auth'])->name('pos.history');
-
-Route::resource('categories', CategoryController::class);
 
