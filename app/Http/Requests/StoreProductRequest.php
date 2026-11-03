@@ -22,9 +22,12 @@ class StoreProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'  => ['required', 'string', 'max:255', 'unique:categories,name'],
-            // 'gt:0' (greater than 0) memastikan nilai angka harus lebih besar dari 0 (tidak boleh 0 atau minus)
-            'price' => ['required', 'numeric', 'gt:0'],
+            'category_id' => ['required', 'exists:categories,id'],
+            'code'        => ['required', 'string', 'max:50', 'unique:products,code'],
+            'name'        => ['required', 'string', 'max:255'],
+            'unit'        => ['required', 'string', 'max:20'],
+            'price'       => ['required', 'numeric', 'min:0'],
+            'stock'       => ['required', 'integer', 'min:0'],
         ];
     }
 
@@ -34,11 +37,18 @@ class StoreProductRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required'  => 'Nama kategori wajib diisi.',
-            'name.unique'    => 'Nama kategori sudah terdaftar.',
-            'price.required' => 'Harga wajib diisi.',
-            'price.numeric'  => 'Harga harus berupa angka.',
-            'price.gt'       => 'Harga harus lebih besar dari 0.',
+            'category_id.required' => 'Kategori wajib dipilih.',
+            'category_id.exists'   => 'Kategori tidak valid.',
+            'code.required'        => 'Kode produk wajib diisi.',
+            'code.unique'          => 'Kode produk sudah terdaftar.',
+            'name.required'        => 'Nama produk wajib diisi.',
+            'unit.required'        => 'Satuan produk wajib diisi.',
+            'price.required'       => 'Harga wajib diisi.',
+            'price.numeric'        => 'Harga harus berupa angka.',
+            'price.min'            => 'Harga tidak boleh minus.',
+            'stock.required'       => 'Stok wajib diisi.',
+            'stock.integer'        => 'Stok harus berupa bilangan bulat.',
+            'stock.min'            => 'Stok tidak boleh minus.',
         ];
     }
 }
