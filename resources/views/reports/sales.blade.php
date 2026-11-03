@@ -2,12 +2,21 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="font-semibold text-xl text-gray-800">Laporan Penjualan</h2>
-            <button type="button" onclick="window.print()" class="no-print bg-gray-800 text-white px-4 py-2 rounded-md text-sm hover:bg-gray-700 flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4H7v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
-                </svg>
-                Cetak Laporan
-            </button>
+            <div class="flex gap-2 no-print">
+                <a href="{{ route('report.export', ['start' => $startDate, 'end' => $endDate, 'user_id' => $cashierId]) }}"
+                   class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-md text-sm flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    Export Excel
+                </a>
+                <button type="button" onclick="window.print()" class="bg-gray-800 text-white px-4 py-2 rounded-md text-sm hover:bg-gray-700 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4H7v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+                    </svg>
+                    Cetak Laporan
+                </button>
+            </div>
         </div>
     </x-slot>
 
@@ -30,7 +39,7 @@
     <div class="py-8 space-y-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             
-            {{-- Form Filter Periode Tanggal --}}
+            {{-- Form Filter Periode Tanggal & Kasir --}}
             <div class="no-print">
                 <x-card>
                     <form method="GET" action="{{ route('report.sales') }}" class="flex flex-wrap items-end gap-4">
@@ -43,6 +52,17 @@
                             <label class="block text-xs font-medium text-gray-600 mb-1">Sampai Tanggal</label>
                             <input type="date" name="end_date" value="{{ $endDate }}"
                                 class="rounded-md border-gray-300 text-sm focus:border-indigo-500 focus:ring-indigo-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-600 mb-1">Pilih Kasir</label>
+                            <select name="user_id" class="rounded-md border-gray-300 text-sm focus:border-indigo-500 focus:ring-indigo-500 min-w-[160px]">
+                                <option value="">Semua Kasir</option>
+                                @foreach ($cashiers as $c)
+                                    <option value="{{ $c->id }}" @selected($cashierId == $c->id)>
+                                        {{ $c->name }} ({{ ucfirst($c->role) }})
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="flex gap-2">
                             <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium">
