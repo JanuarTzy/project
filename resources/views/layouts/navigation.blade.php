@@ -17,6 +17,14 @@
                         class="{{ request()->routeIs('products.*') ? 'text-indigo-600' : 'text-gray-500' }}">
                         Produk
                     </a>
+                    <a href="{{ route('suppliers.index') }}"
+                        class="{{ request()->routeIs('suppliers.*') ? 'text-indigo-600' : 'text-gray-500' }}">
+                        Supplier
+                    </a>
+                    <a href="{{ route('purchases.index') }}"
+                        class="{{ request()->routeIs('purchases.*') ? 'text-indigo-600' : 'text-gray-500' }}">
+                        Pembelian Stok (PO)
+                    </a>
                     <a href="{{ route('report.sales') }}"
                         class="{{ request()->routeIs('report.sales') ? 'text-indigo-600' : 'text-gray-500' }}">
                         Laporan

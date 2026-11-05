@@ -5,6 +5,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\PosController;
 use App\Http\Controllers\Auth\LoginController;
@@ -36,6 +38,8 @@ Route::post('/logout', [LoginController::class, 'destroy'])
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('categories', CategoryController::class);
     Route::resource('products', ProductController::class);
+    Route::resource('suppliers', SupplierController::class);
+    Route::resource('purchases', PurchaseController::class)->except(['edit', 'update']);
     Route::resource('users', UserController::class);
     Route::get('/reports/sales', [ReportController::class, 'sales'])->name('report.sales');
     Route::get('/reports/sales/export', [ReportController::class, 'export'])->name('report.export');
