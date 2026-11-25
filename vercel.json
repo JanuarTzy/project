@@ -3,7 +3,7 @@
     "framework": null,
     "builds": [
         {
-            "src": "public/index.php",
+            "src": "api/index.php",
             "use": "vercel-php@0.7.3"
         },
         {
@@ -20,8 +20,12 @@
             "dest": "/public/build/$1"
         },
         {
+            "src": "/images/(.*)",
+            "dest": "/public/images/$1"
+        },
+        {
             "src": "/(.*)",
-            "dest": "/public/index.php"
+            "dest": "/api/index.php"
         }
     ]
 }
