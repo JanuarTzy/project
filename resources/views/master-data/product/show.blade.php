@@ -4,13 +4,13 @@
         <h2 class="font-semibold text-xl text-gray-800">Detail Produk</h2>
     </x-slot>
  
-    <div class="py-12 space-y-6">
-        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
+    <div class="py-6 sm:py-12 space-y-6">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <x-card>
                 <h3 class="text-lg font-semibold">{{ $product->name }}</h3>
                 <p class="text-sm text-gray-500 mb-4">{{ $product->code }} &middot; {{ $product->category->name }}</p>
  
-                <div class="grid grid-cols-3 gap-4 mb-6">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
                     <div class="bg-gray-50 rounded-md p-4 text-center">
                         <p class="text-xs text-gray-500">Harga</p>
                         <p class="text-lg font-semibold">Rp{{ number_format($product->price, 0, ',', '.') }}</p>
@@ -26,7 +26,8 @@
                 </div>
  
                 <h4 class="font-medium mb-2">5 Hari Penjualan Tertinggi</h4>
-                <table class="min-w-full divide-y divide-gray-200 text-sm mb-6">
+                <div class="overflow-x-auto mb-6">
+                <table class="min-w-full divide-y divide-gray-200 text-sm">
                     <thead>
                         <tr>
                             <th class="px-3 py-2 text-left">Peringkat</th>
@@ -48,8 +49,10 @@
                         @endforelse
                     </tbody>
                 </table>
+                </div>
 
                 <h4 class="font-medium mb-2">Riwayat Penjualan Terakhir</h4>
+                <div class="overflow-x-auto">
                 <table class="min-w-full divide-y divide-gray-200 text-sm">
                     <thead>
                         <tr>
@@ -72,6 +75,7 @@
                         @endforelse
                     </tbody>
                 </table>
+                </div>
             </x-card>
         </div>
     </div>

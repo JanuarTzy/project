@@ -1,14 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex justify-between items-center">
+        <div class="flex flex-wrap justify-between items-center gap-3">
             <h2 class="font-semibold text-xl text-gray-800">Data Produk</h2>
             <a href="{{ route('products.create') }}" class="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm">
                 + Tambah Produk
             </a>
         </div>
     </x-slot>
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="py-6 sm:py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <x-card>
                 @if (session('success'))
                     <div class="mb-4 p-3 bg-green-100 text-green-700 rounded-md text-sm">
@@ -17,7 +17,7 @@
                 @endif
 
                 
-<form method="GET" action="{{ route('products.index') }}" class="flex gap-3 mb-4">
+<form method="GET" action="{{ route('products.index') }}" class="flex flex-col sm:flex-row gap-3 mb-4">
     <input type="text" name="search" value="{{ request('search') }}"
         placeholder="Cari nama atau kode produk..."
         class="flex-1 rounded-md border-gray-300 shadow-sm">
@@ -31,10 +31,13 @@
         @endforeach
     </select>
  
-    <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded-md">Cari</button>
-    <a href="{{ route('products.index') }}" class="px-4 py-2 text-gray-500">Reset</a>
+    <div class="flex gap-2">
+        <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded-md">Cari</button>
+        <a href="{{ route('products.index') }}" class="px-4 py-2 text-gray-500">Reset</a>
+    </div>
 </form>
 
+                <div class="overflow-x-auto">
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead class="bg-gray-50">
                         <tr>
@@ -87,6 +90,7 @@
                         @endforelse
                     </tbody>
                 </table>
+                </div>
                 <div class="mt-4">{{ $products->links() }}</div>
             </x-card>
         </div>

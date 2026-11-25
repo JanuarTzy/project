@@ -7,8 +7,8 @@
     @vite('resources/css/app.css')
 </head>
 
-<body class="bg-gray-100 min-h-screen flex items-center justify-center">
-    <div class="bg-white p-8 rounded-lg shadow-sm w-full max-w-sm">
+<body class="bg-gray-100 min-h-screen flex items-center justify-center px-4">
+    <div class="bg-white p-6 sm:p-8 rounded-lg shadow-sm w-full max-w-sm">
         <h1 class="text-xl font-semibold mb-6 text-center">POS Barokah Mart</h1>
  
         @if ($errors->any())

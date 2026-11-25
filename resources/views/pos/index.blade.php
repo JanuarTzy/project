@@ -3,9 +3,9 @@
         <h2 class="font-semibold text-xl text-gray-800">Transaksi Penjualan</h2>
     </x-slot>
  
-    <div class="py-8"
+    <div class="py-6 sm:py-8"
          x-data="posCart({{ $products->toJson() }})">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             @if (session('error'))
                 <div class="mb-4 p-4 bg-red-100 border border-red-200 text-red-700 rounded-md text-sm">
                     {{ session('error') }}
@@ -26,15 +26,15 @@
                 </div>
             @endif
 
-            <div class="grid grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
  
             <!-- Kolom kiri: pencarian & daftar produk -->
-            <div class="col-span-2">
+            <div class="lg:col-span-2">
                 <x-card>
                     <input type="text" x-model="keyword" placeholder="Cari nama atau kode produk..."
                         class="w-full rounded-md border-gray-300 mb-4">
  
-                    <div class="grid grid-cols-3 gap-3 max-h-[420px] overflow-y-auto">
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 max-h-[420px] overflow-y-auto">
                         <template x-for="product in filteredProducts()" :key="product.id">
                             <button type="button" @click="addItem(product)"
                                 class="border rounded-md p-3 text-left hover:bg-indigo-50 transition">
@@ -44,7 +44,7 @@
                             </button>
                         </template>
 
-                        <div x-show="filteredProducts().length === 0" class="col-span-3 text-center py-8 text-gray-400">
+                        <div x-show="filteredProducts().length === 0" class="col-span-2 sm:col-span-3 text-center py-8 text-gray-400">
                             Tidak ada produk yang tersedia.
                         </div>
                     </div>

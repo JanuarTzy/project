@@ -2,8 +2,8 @@
 <x-app-layout>
     <x-slot name="header"><h2 class="font-semibold text-xl">Dashboard</h2></x-slot>
  
-    <div class="py-8 space-y-6">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 grid grid-cols-4 gap-4">
+    <div class="py-6 sm:py-8 space-y-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <x-card>
                 <p class="text-xs text-gray-500">Omzet Hari Ini</p>
                 <p class="text-xl font-semibold">Rp{{ number_format($omzetHariIni, 0, ',', '.') }}</p>
@@ -22,8 +22,8 @@
             </x-card>
         </div>
  
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 grid grid-cols-3 gap-6">
-            <x-card class="col-span-2">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <x-card class="lg:col-span-2">
                 <h3 class="font-semibold mb-3">Tren Penjualan 7 Hari Terakhir</h3>
                 <canvas id="chartTren" height="120"></canvas>
             </x-card>
