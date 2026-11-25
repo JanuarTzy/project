@@ -53,9 +53,9 @@
         <div class="max-w-md mx-auto sm:px-6">
             <x-card class="struk-container bg-white">
                 <div class="text-center">
-                    <p class="font-bold text-base tracking-wide uppercase">POS Barokah Mart</p>
-                    <p class="text-xs text-gray-500">Jl. Raya Barokah No. 123</p>
-                    <p class="text-xs text-gray-500">Telp: 0812-3456-7890</p>
+                    <p class="font-bold text-base tracking-wide uppercase">Fadhil Mart</p>
+                    <p class="text-xs text-gray-500">Jl. Narayana 13 No. 304</p>
+                    <p class="text-xs text-gray-500">Telp: 0812-9338-8748</p>
                     <p class="font-mono text-xs text-gray-600 mt-1 font-semibold">{{ $transaction->invoice_number }}</p>
                     <p class="text-[11px] text-gray-500 mt-0.5">
                         {{ $transaction->created_at->format('d/m/Y H:i') }} | Kasir: {{ $transaction->user->name }}
